@@ -63,9 +63,39 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 # Upload weather data
 upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
 
+##############################################################
+## Big Query
+##############################################################
 
+## Create Schema to then populate with data
+# Table for deforestation data has the same structure as the postgres
+# pip install bigquery
+from google.cloud import bigquery
 
+# Construct a BigQuery client object.
+client = bigquery.Client()
 
+# Table id: projectid.dataset.tablename
+# dataset has been created through the web interface
+table_id = "engineering-group-project.test_deforestation_causes_regions.deforestation_data"
+
+# Schema for deforestation data in BigQuery
+schema = [
+    bigquery.SchemaField("label", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("merged_label", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("latitude", "FLOAT", mode="NULLABLE"),
+    bigquery.SchemaField("longitude", "FLOAT", mode="NULLABLE"),
+    bigquery.SchemaField("year", "INTEGER", mode="NULLABLE"),
+    bigquery.SchemaField("example_path", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("province", "STRING", mode="NULLABLE"),
+]
+
+# Create the table with the specified schema.
+table = bigquery.Table(table_id, schema=schema)
+table = client.create_table(table)  # Make an API request.
+print(
+    "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
+)
 
 
 
