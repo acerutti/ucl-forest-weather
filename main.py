@@ -8,6 +8,7 @@ Make sure you have google the cloud storage package installed:
 import os
 import io
 from google.cloud import storage
+import pandas as pd
 
 # alessandra relative path
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-project-fcf687e1fa4b.json"
@@ -59,6 +60,8 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 
 #upload_blob("ucl-forest", "test_image.jpeg", "test_image")
 
+# Upload weather data
+upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
 
 
 
