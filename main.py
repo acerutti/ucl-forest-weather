@@ -68,6 +68,9 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 # Upload weather data
 upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
 
+# Upload update weather data (entries per year, per province per the top 3 provinces with most pictures)
+upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historical_weather_data_annual.csv")
+
 ##############################################################
 ## Big Query
 ##############################################################
@@ -117,5 +120,14 @@ print(
     "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
 )
 
+##############################################################
+## Weather Data Checking Class
+##############################################################
 
+df_weather = pd.read_csv("data/historical_weather_data_annual.csv")
+df_weather.info()
+
+df_weather.columns = map(str.lower, df_weather.columns)
+
+df_weather.to_csv("data_weather_modified")
 
