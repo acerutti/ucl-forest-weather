@@ -94,7 +94,7 @@ client = bigquery.Client()
 
 # Table id: projectid.dataset.tablename
 # dataset has been created through the web interface
-table_id = "engineering-group-project.test_deforestation_causes_regions.deforestation_data"
+table_id = "engineering-group-project.forest_dataset.deforestation_data"
 
 # Schema for deforestation data in BigQuery
 schema = [
