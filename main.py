@@ -13,8 +13,9 @@ import io
 from google.cloud import storage
 
 # alessandra relative path
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-project-fcf687e1fa4b.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-project-fcf687e1fa4b.json"
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "nefeli-hip-beaker-402316-569b53de9d8b.json"
 # Instantiates a client
 storage_client = storage.Client()
 

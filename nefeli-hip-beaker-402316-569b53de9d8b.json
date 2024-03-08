@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "hip-beaker-402316",
+  "private_key_id": "569b53de9d8bdd02dad02fa333f7bd37ff05be6a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD4dSxmK/lfZN+9\n+QX16UwQu5PgpBGiEoR1t0418piXWihbEmGlJ/2rs0WtaJR5zFzOqPYCjh04Zag9\nIVb3J30RZU5PBqOm/UOdwnT2YzjCDttYXcojsdUOWAmYb0kMOeToaTTD184+5x6v\nmWhIyFNp3qEZlnWUasjDzLvh7qzIcDNEM3QNssaQMUjOxNc6l3FEmmP2fH8Ai7Ue\nSzB4VfXHGDVjaHeLiWFmUwWef4oQ7nQnv1U8ussUKK/zZkr70j2ZD0ldQUA3MIF+\nMS9+AiqjElGUlZJWRHE5JGp66UslnRm0ETSx669L9VpjLaPCaeXEJA/nGDI4MTmd\nkRNcnQgFAgMBAAECggEAM9fnUs58M36N/Ur4Bm8O0zMA0VAK6eGpSBLeu/0KABLs\n9svoGhk1Il2+/UckLCILf4fcBX539Gup5k+NoPbZbwbPh0fgYBjawhFwbHUZw8xr\n0o2Hf1k9FsgiAG/AM0/lRuWk//SI8bEyQvvkucMrPJ0ayocNs9FwYQLYdXVjElOF\n7lY8B6gCV3gzyTlIKc7CJ0dPGooDsEpVa0QAORUaopcpGYCJplyd6RshuB7kFGdB\n2MuRsvNCq/c8yWhRqkj6QQtc6i904aBAcMogtcfoErstSmO+tYowWCwASUZb6SEy\nhjytjTJLa+LXXvYS/lFCNhA82zvckplclsyLpNRO4QKBgQD94UovvBGWvVB5Zzoo\ndq/XNAZyVUOvwJ3oac/hFJfukRItysxThRRGmk+AHoghNpLDxSmvY3MmeWIVJczS\n8MDHpt5ZJIvclNbYQhkQQOEnii8yrH7asSK7aFs7J2OmJmqTuZOsi/e4bQHrdAqt\nR5CXi0HRpYGY8sCpzknmM+2rbQKBgQD6iEri5oe1YlJTQyEmLimcPFGN9z1MVUA7\nAzFRgOI4Q4/pEdSivqj+AqOG78V1yH4hMU4SJ5Zs0FrfwbD/vD5l5wDr7J9RFLD4\npTxHwE8pDM7T2KmdGCasWuXRfrdmSx/1lKq6ALPV9Q3+HFGruPB4rH3sMkL6khm7\nx9fzaySX+QKBgQCjLYmsUroPZBD0ZxfnaBmvPX4jQJBnx2r3NgNqDP12VgIUMrPP\nvsqAcrBEjds7VcNRV0lqtIYPpZcYNpqGvj16VdO2AhpvJa9NgnZvjvPooRWjAWHr\nmEzVncZ9p9yRr0FzP6UeEzyealoAhy5Rn5zc+qHMaQ96ShTxT2kKMDhDpQKBgQDd\nA1VE++fmfNlxeHwK6Zhtqsyrd9wMtfxW0wc0BoYK6pdPHhq+g4Ijq4JFbMp+kKOs\ndomP/Hp4fgpc8MtLn+5QCUzH1FPrvFwuzd3y0lVDOnhPbQicfIzJadrqSGZUiJum\nE0PVmP8NFgUFEkh+PEVvv4PK1cA+upqXDMKWjAOZSQKBgEqvPy+T/EQ7x0LXetjK\nVg0wB1G05kG7aqFKK7Wxko0+Rhhg3oVkEWMggeikjiyBNZgZELmwRgNXCgkf0lM2\nTD85xZiMdxmU8k64l4R79YSZEQR29FpSIlmyTTAaJ/wguKbHbuHevPhs/BtSTtuO\nD+VDKbUfT0N2NRtvACyHHPQe\n-----END PRIVATE KEY-----\n",
+  "client_email": "nefeli-marketou@hip-beaker-402316.iam.gserviceaccount.com",
+  "client_id": "110525758648864967681",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nefeli-marketou%40hip-beaker-402316.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
