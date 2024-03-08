@@ -15,6 +15,9 @@ from google.cloud import bigquery
 # alessandra relative path
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-project-fcf687e1fa4b.json"
 
+#amita relative path
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-0489a29e6826.json"
+
 ####################################################################
 ##### CREATE BUCKET
 ####################################################################
