@@ -68,6 +68,9 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 # Upload weather data
 upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
 
+# Upload update weather data (entries per year, per province per the top 3 provinces with most pictures)
+upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historical_weather_data_annual.csv")
+
 ##############################################################
 ## Big Query
 ##############################################################
@@ -117,5 +120,32 @@ print(
     "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
 )
 
+##############################################################
+## Weather Data Checking Class
+##############################################################
+
+df_weather = pd.read_csv("data/historical_weather_data_annual.csv")
+df_weather.info()
+
+df_weather.columns = map(str.lower, df_weather.columns)
+
+# getting to long format
+# Melting the DataFrame to go from wide to long format
+df_temp = df_weather.melt(id_vars=['province'], value_vars=[col for col in df_weather.columns if 'temp' in col], var_name='year', value_name='average_temp')
+df_rain = df_weather.melt(id_vars=['province'], value_vars=[col for col in df_weather.columns if 'rain' in col], var_name='year', value_name='average_rain')
+
+# Extract year from the 'year' column
+df_temp['year'] = df_temp['year'].str.extract('(\d{4})').astype(int)
+df_rain['year'] = df_rain['year'].str.extract('(\d{4})').astype(int)
+
+# Drop the "_average_temp" and "_average_rain" from the 'year' columns to have only the year
+df_temp['year'] = df_temp['year'].str.replace('_average_temp', '')
+df_rain['year'] = df_rain['year'].str.replace('_average_rain', '')
+
+# Merge the temperature and rainfall DataFrames on 'province' and 'year'
+df_combined = pd.merge(df_temp, df_rain, on=['province', 'year'])
+
+df_combined.head()
 
 
+# Savve df combined
