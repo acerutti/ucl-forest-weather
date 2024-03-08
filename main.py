@@ -9,6 +9,8 @@ import os
 import io
 from google.cloud import storage
 import pandas as pd
+# pip install bigquery
+from google.cloud import bigquery
 
 # alessandra relative path
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-project-fcf687e1fa4b.json"
@@ -66,11 +68,26 @@ upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_
 ##############################################################
 ## Big Query
 ##############################################################
+## FIRST: Create Dataset
+# Construct a BigQuery client object
+client = bigquery.Client()
 
-## Create Schema to then populate with data
+# Set dataset_id to the ID of the dataset to create.
+dataset_id = "{}.forest_dataset".format(client.project)
+
+# Construct a full Dataset object to send to the API.
+dataset = bigquery.Dataset(dataset_id)
+
+# Specify the geographic location where the dataset should reside.
+dataset.location = "US"
+
+# Send the dataset to the API for creation, with an explicit timeout.
+dataset = client.create_dataset(dataset, timeout=30)  # Make an API request.
+print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
+
+
+## SECOND: Create Schema to then populate with data
 # Table for deforestation data has the same structure as the postgres
-# pip install bigquery
-from google.cloud import bigquery
 
 # Construct a BigQuery client object.
 client = bigquery.Client()
