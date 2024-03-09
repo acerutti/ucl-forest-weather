@@ -85,6 +85,7 @@ list_tables()
 ##############################################################
 
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import lower
 
 spark = SparkSession.builder \
     .appName("YourAppName") \
@@ -107,8 +108,15 @@ deforestation_df = spark.read \
 weather_df = spark.read \
     .jdbc(url=database_url, table="weather_data", properties=properties)
 
-print(deforestation_df.head())
-print(weather_df.head())
+
+
+# Convert 'province' column to lower case for deforestation_df
+deforestation_df = deforestation_df.withColumn('province', lower(deforestation_df['province']))
+deforestation_df.show()
+
+# Convert 'province' column to lower case for weather_df
+weather_df = weather_df.withColumn('province', lower(weather_df['province']))
+weather_df.show()
 
 # Perform the left join
 merged_df = deforestation_df.join(weather_df, ['year', 'province'], how='left')
