@@ -36,7 +36,7 @@ storage_client = storage.Client()
 #print(f"Bucket {bucket.name} created.")
 
 ## FOREST BUCKET
-# The name for the new bucket for the weather
+# The name for the new bucket for the forest
 #bucket_name = "ucl-forest"
 
 # Creates the new bucket for 
@@ -147,5 +147,5 @@ df_combined = pd.merge(df_temp, df_rain, on=['province', 'year'])
 
 df_combined.head()
 
-
 # Savve df combined
+df_combined.to_csv("data/combined_weather_long.csv")
