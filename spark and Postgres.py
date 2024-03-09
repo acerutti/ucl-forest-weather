@@ -127,3 +127,40 @@ output_path = "/Users/amita/ucl-forest-weather-1/data/merged"
 # Save the merged DataFrame as CSV
 merged_df.write.csv(output_path, header=True, mode="overwrite")
 
+###############################################################################
+#### CREATE BUCKET  ####
+###############################################################################
+
+# The csv files for deforestation and weather data and the image files are ploaded into buckets
+
+# Instantiates a client
+storage_client = storage.Client()
+
+## WEATHER BUCKET ##
+# The name for the new bucket for the weather
+
+bucket_name = "ucl-merged"
+bucket = storage_client.create_bucket(bucket_name)
+print(f"Bucket {bucket.name} created.")
+
+
+###############################################################################
+#### WRITE ON THE BUCKET ####
+###############################################################################
+
+# Upload the files to their respective buckets
+
+def upload_blob(bucket_name, source_file_name, destination_blob_name):
+  """Uploads a file to the bucket."""
+  storage_client = storage.Client()
+  bucket = storage_client.get_bucket(bucket_name)
+  blob = bucket.blob(destination_blob_name)
+
+  blob.upload_from_filename(source_file_name)
+
+  print('File {} uploaded to {}.'.format(
+      source_file_name,
+      destination_blob_name))
+
+# Upload update weather data (entries per year, per province per the top 3 provinces with most pictures)
+upload_blob("ucl-merged", "data/merged/merged_deforestation_weather.csv", "merged_deforestation_weather.csv")
