@@ -74,6 +74,10 @@ upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historica
 # Upload combined long weather data (entries per year, per province per the top 3 provinces with most pictures)
 upload_blob("ucl-weather", "data/combined_weather_data.csv", "combined_weather_data.csv")
 
+
+# uploaad images
+
+
 ##############################################################
 ## Big Query
 ##############################################################
