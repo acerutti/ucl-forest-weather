@@ -40,7 +40,7 @@ storage_client = storage.Client()
 #print(f"Bucket {bucket.name} created.")
 
 ## FOREST BUCKET
-# The name for the new bucket for the weather
+# The name for the new bucket for the forest
 #bucket_name = "ucl-forest"
 
 # Creates the new bucket for 
@@ -65,18 +65,38 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
       source_file_name,
       destination_blob_name))
   
-#upload_blob("ucl-weather", "california_housing_test.csv", "test_dataset.csv")
-
-#upload_blob("ucl-forest", "test_image.jpeg", "test_image")
-
 # Upload weather data
-upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
+#upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
 
 # Upload update weather data (entries per year, per province per the top 3 provinces with most pictures)
-upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historical_weather_data_annual.csv")
+#upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historical_weather_data_annual.csv")
 
 # Upload combined long weather data (entries per year, per province per the top 3 provinces with most pictures)
-upload_blob("ucl-weather", "data/combined_weather_data.csv", "combined_weather_data.csv")
+#upload_blob("ucl-weather", "data/combined_weather_data.csv", "combined_weather_data.csv")
+
+
+# define function to upload different folders of the images
+def upload_directory_to_bucket(bucket_name, source_directory):
+    """Uploads a directory to the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    
+    for local_dir, _, files in os.walk(source_directory):
+        for file in files:
+            local_file_path = os.path.join(local_dir, file)
+            
+            # Construct the full path for the destination blob
+            # Using the folder names as the blob prefix
+            relative_path = os.path.relpath(local_file_path, source_directory)
+            destination_blob_name = relative_path.replace("\\", "/")  # Ensure proper path format for GCS
+            
+            blob = bucket.blob(destination_blob_name)
+            blob.upload_from_filename(local_file_path)
+            
+            print(f'File {local_file_path} uploaded to {destination_blob_name}.')
+
+# upload folders with the images 
+# upload_directory_to_bucket('ucl-forest', 'data/image_forest_test')
 
 ##############################################################
 ## Big Query
@@ -154,5 +174,5 @@ df_combined = pd.merge(df_temp, df_rain, on=['province', 'year'])
 
 df_combined.head()
 
-
 # Savve df combined
+df_combined.to_csv("data/combined_weather_long.csv")
