@@ -1,10 +1,8 @@
 ##############################################################
 ## Connection Postgres
 ##############################################################
-
-import sys #pip install "cloud-sql-python-connector[pg8000]"
-from google.cloud.sql.connector import Connector
-import sqlalchemy
+from google.cloud.sql.connector import Connector # pip install "cloud-sql-python-connector[pg8000]"
+import sqlalchemy # pip install sqlalchemy
 
 # define the project id, region and instance name
 project_id = "engineering-group-project"
@@ -14,8 +12,9 @@ instance_name = "forestnet-data"
 # grant Cloud SQL Client role to authenticated user
 current_user = ['alessandra.eli.cerutti@gmail.com']
 
-INSTANCE_CONNECTION_NAME = f"{project_id}:{region}:{instance_name}" # i.e demo-project:us-central1:demo-instance
+INSTANCE_CONNECTION_NAME = f"{project_id}:{region}:{instance_name}" 
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
+
 DB_USER = "postgres"
 DB_PASS = "baucl"
 DB_NAME = "postgres"
