@@ -28,7 +28,6 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-
 # with the deforestation_causes_regions data.
 # this should help later on for better data analysis
 
-
 df_weather = pd.read_csv("data/historical_weather_data_annual.csv")
 df_weather.info()
 
