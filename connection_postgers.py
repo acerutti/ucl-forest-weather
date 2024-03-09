@@ -1,6 +1,8 @@
 ##############################################################
 ## Connection Postgres
 ##############################################################
+# code based from: https://github.com/GoogleCloudPlatform/cloud-sql-python-connector.git
+
 from google.cloud.sql.connector import Connector # pip install "cloud-sql-python-connector[pg8000]"
 import sqlalchemy # pip install sqlalchemy
 
