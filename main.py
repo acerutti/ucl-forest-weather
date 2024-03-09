@@ -18,6 +18,10 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-pr
 #amita relative path
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-0489a29e6826.json"
 
+
+
+
+
 ####################################################################
 ##### CREATE BUCKET
 ####################################################################
