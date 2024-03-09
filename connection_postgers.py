@@ -54,6 +54,7 @@ def list_tables():
     """
 
     try:
+        
         # Execute the query
         cursor.execute(list_tables_query)
         
