@@ -1,6 +1,9 @@
 #############################################################
 ## Weather Data Checking Class
 ##############################################################
+# this script aims to change teh weather data so that it is in a long format instead of wide
+# this should help later on for better data analysis
+
 import pandas as pd
 df_weather = pd.read_csv("data/historical_weather_data_annual.csv")
 df_weather.info()
@@ -26,6 +29,7 @@ df_combined = pd.merge(df_temp, df_rain, on=['province', 'year'])
 
 df_combined.head()
 
+# Savve df combined
 df_combined.to_csv("combined_weather_data.csv", index=False)
 
-# Savve df combined
+
