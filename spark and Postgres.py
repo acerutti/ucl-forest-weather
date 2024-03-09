@@ -1,8 +1,15 @@
 ##############################################################
-## Connection Postgres
+## CONNECTION POSTGRES 
 ##############################################################
 from google.cloud.sql.connector import Connector # pip install "cloud-sql-python-connector[pg8000]"
 import sqlalchemy # pip install sqlalchemy
+import os
+import io
+from google.cloud import storage
+import pandas as pd
+
+#connect to gcp environment
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-0489a29e6826.json"
 
 # define the project id, region and instance name
 project_id = "engineering-group-project"
@@ -54,6 +61,7 @@ def list_tables():
     """
 
     try:
+        
         # Execute the query
         cursor.execute(list_tables_query)
         
@@ -71,3 +79,43 @@ def list_tables():
 
 # Call the list_tables function to print out all tables
 list_tables()
+
+##############################################################
+## CONNECTION SPARK
+##############################################################
+
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("YourAppName") \
+    .config("spark.jars", "/Users/amita/Desktop/postgresql-42.7.2.jar") \
+    .getOrCreate()
+
+# PostgreSQL information
+database_url = "jdbc:postgresql://34.136.83.153:5432/postgres"
+properties = {
+    "user": "postgres",
+    "password": "baucl",
+    "driver": "org.postgresql.Driver"
+}
+
+# Reading data from the 'deforestation_data' table
+deforestation_df = spark.read \
+    .jdbc(url=database_url, table="deforestation_data", properties=properties)
+
+# Reading data from the 'weather_data' table
+weather_df = spark.read \
+    .jdbc(url=database_url, table="weather_data", properties=properties)
+
+print(deforestation_df.head())
+print(weather_df.head())
+
+# Perform the left join
+merged_df = deforestation_df.join(weather_df, ['year', 'province'], how='left')
+
+# Define the path where you want to save the CSV files
+output_path = "/Users/amita/ucl-forest-weather-1/data/merged"
+
+# Save the merged DataFrame as CSV
+merged_df.write.csv(output_path, header=True, mode="overwrite")
+
