@@ -1,7 +1,7 @@
 """
 Make sure you have google the cloud storage package installed:
 
-    pip install google-cloud-storage
+pip install google-cloud-storage
 
 """
 ### Imports
@@ -12,46 +12,79 @@ import pandas as pd
 # pip install bigquery
 from google.cloud import bigquery
 
+
+#### CONNECTING TO GCP ENVIRONMENT ####
+
 # alessandra relative path
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ale-secrets-engineering-group-project-fcf687e1fa4b.json"
-
 #amita relative path
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-0489a29e6826.json"
 
+###############################################################################
+#### CREATING A COMBINED WEATHER DATA CSV FILE FROM EXISTING WEATHER DATA ####
+###############################################################################
+
+# this script aims to change the weather data so that it is in a format that can be merged
+# with the deforestation_causes_regions data.
+# this should help later on for better data analysis
 
 
+df_weather = pd.read_csv("data/historical_weather_data_annual.csv")
+df_weather.info()
 
+df_weather.columns = map(str.lower, df_weather.columns)
 
-####################################################################
-##### CREATE BUCKET
-####################################################################
+# getting to long format
+# Melting the DataFrame to go from wide to long format
+df_temp = df_weather.melt(id_vars=['province'], value_vars=[col for col in df_weather.columns if 'temp' in col], var_name='year', value_name='average_temp')
+df_rain = df_weather.melt(id_vars=['province'], value_vars=[col for col in df_weather.columns if 'rain' in col], var_name='year', value_name='average_rain')
 
-## Code is comment because bucket for the weather data has already been created
+# Extract year from the 'year' column
+df_temp['year'] = df_temp['year'].str.extract('(\d{4})').astype(int)
+df_rain['year'] = df_rain['year'].str.extract('(\d{4})').astype(int)
+
+# Drop the "_average_temp" and "_average_rain" from the 'year' columns to have only the year
+df_temp['year'] = df_temp['year'].astype(str).str.replace('_average_temp', '')
+
+df_rain['year'] = df_rain['year'].astype(str).str.replace('_average_rain', '')
+
+# Merge the temperature and rainfall DataFrames on 'province' and 'year'
+df_combined = pd.merge(df_temp, df_rain, on=['province', 'year'])
+
+df_combined.head()
+
+# Savve df combined
+df_combined.to_csv("combined_weather_data.csv", index=False)
+
+###############################################################################
+#### CREATE BUCKET  ####
+###############################################################################
+
+# The csv files for deforestation and weather data and the image files are ploaded into buckets
+
 # Instantiates a client
 storage_client = storage.Client()
 
-## WEATHER BUCKET
+## WEATHER BUCKET ##
 # The name for the new bucket for the weather
-#bucket_name = "ucl-weather"
 
-# Creates the new bucket for 
-#bucket = storage_client.create_bucket(bucket_name)
+bucket_name = "ucl-weather"
+bucket = storage_client.create_bucket(bucket_name)
+print(f"Bucket {bucket.name} created.")
 
-#print(f"Bucket {bucket.name} created.")
-
-## FOREST BUCKET
+## FOREST BUCKET ##
 # The name for the new bucket for the forest
-#bucket_name = "ucl-forest"
 
-# Creates the new bucket for 
-#bucket = storage_client.create_bucket(bucket_name)
-
-#print(f"Bucket {bucket.name} created.")
+bucket_name = "ucl-forest"
+bucket = storage_client.create_bucket(bucket_name)
+print(f"Bucket {bucket.name} created.")
 
 
-####################################################################
-###### WRITE ON THE BUCKET
-####################################################################
+###############################################################################
+#### WRITE ON THE BUCKET ####
+###############################################################################
+
+# Upload the files to their respective buckets
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
   """Uploads a file to the bucket."""
@@ -64,16 +97,17 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
   print('File {} uploaded to {}.'.format(
       source_file_name,
       destination_blob_name))
-  
-# Upload weather data
-#upload_blob("ucl-weather", "data/historical_weather_data_top3.csv", "historical_weather_data_top3.csv")
+
+
+# Upload weather data to ucl-weather bucket 
 
 # Upload update weather data (entries per year, per province per the top 3 provinces with most pictures)
-#upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historical_weather_data_annual.csv")
+upload_blob("ucl-weather", "data/historical_weather_data_annual.csv", "historical_weather_data_annual.csv")
 
 # Upload combined long weather data (entries per year, per province per the top 3 provinces with most pictures)
-#upload_blob("ucl-weather", "data/combined_weather_data.csv", "combined_weather_data.csv")
+upload_blob("ucl-weather", "data/combined_weather_data.csv", "combined_weather_data.csv")
 
+# Upload image data to ucl-forest bucket
 
 # define function to upload different folders of the images
 def upload_directory_to_bucket(bucket_name, source_directory):
@@ -96,11 +130,13 @@ def upload_directory_to_bucket(bucket_name, source_directory):
             print(f'File {local_file_path} uploaded to {destination_blob_name}.')
 
 # upload folders with the images 
-# upload_directory_to_bucket('ucl-forest', 'data/image_forest_test')
+            upload_directory_to_bucket('ucl-forest', 'data/image_forest_test')
 
-##############################################################
-## Big Query
-##############################################################
+
+###############################################################################
+#### CONNECTING POSTGRES TO BIG QUERY ####
+###############################################################################
+
 ## FIRST: Create Dataset
 # Construct a BigQuery client object
 client = bigquery.Client()
@@ -146,4 +182,5 @@ table = client.create_table(table)  # Make an API request.
 print(
     "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
 )
+
 
