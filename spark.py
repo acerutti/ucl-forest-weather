@@ -10,14 +10,16 @@ from google.cloud import bigquery
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-0489a29e6826.json"
 
 from pyspark.sql import SparkSession
+
 spark = SparkSession.builder \
-    .appName("PostgresDataImport") \
+    .appName("YourAppName") \
+    .config("spark.jars", "/Users/amita/Desktop/postgresql-42.7.2.jar") \
     .getOrCreate()
 
 # PostgreSQL information
 database_url = "jdbc:postgresql://34.136.83.153:5432/postgres"
 properties = {
-    "user": "amitasujith",
+    "user": "postgres",
     "password": "baucl",
     "driver": "org.postgresql.Driver"
 }
