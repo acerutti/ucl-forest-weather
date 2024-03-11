@@ -61,7 +61,7 @@ Other contents in the repository:
 ## Impressum
 This repository was developed as an Assignment for the Data Engineering(MSIN0166) Group Coursework of the University College London (UCL) by:
 * **Amita Sujith** Student ID: 23153341
-* **Alessandra Cerutti** Alessandra Cerutti, Student ID: 23228473 
+* **Alessandra Cerutti** Student ID: 23228473 
 * **Nefeli Zampeta Marketou** Student ID: 23165493 
 * **Kevin Hayes** Student ID: 23146448 
 * **Rowan Alexander** Student ID: 23226266 
