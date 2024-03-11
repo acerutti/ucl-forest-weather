@@ -50,7 +50,8 @@ This end-to-end process allows for the data to be managed and analyzed efficient
 - `postgres_SQL_queries.py`: contains interaction with PostgreSQL using SQL statement, contains functions to create new tables, merge data and check contents in tables
 - `template_specification_gcp_postgres.py`: template for specifying secrets to interact with PostgreSQL
 - `your_secrets_for_gcp.json`: json file for your GCP account details
-- `project_report.pdf`: a detailed project report
+- `MSIN011_Data_Engineering_Group_Report.ipynb`: jupiter notebook with the report (Please be aware that running this code in the current environment is not feasible due to the absence of necessary screenshots and datasets. These resources were linked to the file when it was originally created in Google Colab, but such links do not exist here for storage reasons)
+- `MSIN011_Data_Engineering_Group_Report.pdf`: a detailed project report (please note that the maps generated with folium will not be visible)
 - `weather_collection`: a collection of scripts to collect weather data from the selected API and a docker file
 
 Other contents in the repository: 
