@@ -51,10 +51,12 @@ This end-to-end process allows for the data to be managed and analyzed efficient
 - `template_specification_gcp_postgres.py`: template for specifying secrets to interact with PostgreSQL
 - `your_secrets_for_gcp.json`: json file for your GCP account details
 - `project_report.pdf`: a detailed project report
+- `weather_collection`: a collection of scripts to collect weather data from the selected API and a docker file
 
 Other contents in the repository: 
 - `archive`: some helper scripts we used to manipulate data
 - `data`: contains all the data used in the project
+
 
 ## Impressum
 This repository was developed as an Assignment for the Data Engineering(MSIN0166) Group Coursework of the University College London (UCL) by:
