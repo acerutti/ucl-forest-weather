@@ -1,5 +1,5 @@
 ##############################################################
-## CONNECTION POSTGRES 
+## SPARK AND POSTGRES
 ##############################################################
 from google.cloud.sql.connector import Connector # pip install "cloud-sql-python-connector[pg8000]"
 import sqlalchemy # pip install sqlalchemy
@@ -7,24 +7,16 @@ import os
 import io
 from google.cloud import storage
 import pandas as pd
+from template_specification_gcp_postgres import project_id, region, instance_name, current_user, DB_USER, DB_PASS, DB_NAME
 
 #connect to gcp environment
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "amita-engineering-group-project-0489a29e6826.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "your_secrets_for_gcp.json"
 
-# define the project id, region and instance name
-project_id = "engineering-group-project"
-region = "us-central1"
-instance_name = "forestnet-data"
-
-# grant Cloud SQL Client role to authenticated user
-current_user = ['alessandra.eli.cerutti@gmail.com']
-
+# define instance connection name
 INSTANCE_CONNECTION_NAME = f"{project_id}:{region}:{instance_name}" 
-print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 
-DB_USER = "postgres"
-DB_PASS = "baucl"
-DB_NAME = "postgres"
+# print the connection name
+print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 
 # initialize Connector object
 connector = Connector()
@@ -109,7 +101,6 @@ weather_df = spark.read \
     .jdbc(url=database_url, table="weather_data", properties=properties)
 
 
-
 # Convert 'province' column to lower case for deforestation_df
 deforestation_df = deforestation_df.withColumn('province', lower(deforestation_df['province']))
 deforestation_df.show()
@@ -149,18 +140,19 @@ print(f"Bucket {bucket.name} created.")
 ###############################################################################
 
 # Upload the files to their respective buckets
+from main import upload_blob
 
-def upload_blob(bucket_name, source_file_name, destination_blob_name):
+# def upload_blob(bucket_name, source_file_name, destination_blob_name):
   """Uploads a file to the bucket."""
-  storage_client = storage.Client()
-  bucket = storage_client.get_bucket(bucket_name)
-  blob = bucket.blob(destination_blob_name)
+  # storage_client = storage.Client()
+  # bucket = storage_client.get_bucket(bucket_name)
+  # blob = bucket.blob(destination_blob_name)
 
-  blob.upload_from_filename(source_file_name)
+  # blob.upload_from_filename(source_file_name)
 
-  print('File {} uploaded to {}.'.format(
-      source_file_name,
-      destination_blob_name))
+  # print('File {} uploaded to {}.'.format(
+      #source_file_name,
+      #destination_blob_name))
 
 # Upload update weather data (entries per year, per province per the top 3 provinces with most pictures)
 upload_blob("ucl-merged", "data/merged/merged_deforestation_weather.csv", "merged_deforestation_weather.csv")
