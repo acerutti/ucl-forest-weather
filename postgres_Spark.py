@@ -7,7 +7,7 @@ import os
 import io
 from google.cloud import storage
 import pandas as pd
-from template_specification_gcp_postgres import project_id, region, instance_name, current_user, DB_USER, DB_PASS, DB_NAME
+from template_postgres_specification import project_id, region, instance_name, current_user, DB_USER, DB_PASS, DB_NAME
 
 #connect to gcp environment
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "your_secrets_for_gcp.json"
@@ -140,10 +140,11 @@ print(f"Bucket {bucket.name} created.")
 ###############################################################################
 
 # Upload the files to their respective buckets
-from main import upload_blob
+# importing the function defined in main(see comment below)
+from bucket import upload_blob
 
 # def upload_blob(bucket_name, source_file_name, destination_blob_name):
-  """Uploads a file to the bucket."""
+  # """Uploads a file to the bucket."""
   # storage_client = storage.Client()
   # bucket = storage_client.get_bucket(bucket_name)
   # blob = bucket.blob(destination_blob_name)
