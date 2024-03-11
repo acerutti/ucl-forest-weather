@@ -1,4 +1,4 @@
-# Data Pipeline to Detect Deforestation Causes in Indonesia (ucl-forest-weather)
+# Data Pipeline to Detect Deforestation Causes in Indonesia
 
 Data Pipeline to store forest satellite images and weather data to analyse deforestation causes in Indonesia better.
 
