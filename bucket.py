@@ -9,7 +9,7 @@ from google.cloud import storage #!pip install google-cloud-storage
 import pandas as pd
 # pip install bigquery
 from google.cloud import bigquery
-from template_postgres_specification import project_id, region, instance_name, current_user, DB_USER, DB_PASS, DB_NAME
+from template_specification_gcp_postgres import project_id, region, instance_name, current_user, DB_USER, DB_PASS, DB_NAME
 
 #### CONNECTING TO GCP ENVIRONMENT ####
 # 1. Ensure your secrets are in json file
