@@ -46,10 +46,22 @@ This end-to-end process allows for the data to be managed and analyzed efficient
 - `postgres_SQL_queries.py`: contains interaction with PostgreSQL using SQL statement, contains functions to create new tables, merge data and check contents in tables
 - `template_specification_gcp_postgres.py`: template for specifying secrets to interact with PostgreSQL
 - `your_secrets_for_gcp.json`: json file for your GCP account details
+- `project_report.pdf`: a detailed project report
 
 Other contents in the repository: 
 - `archive`: some helper scripts we used to manipulate data
 - `data`: contains all the data used in the project
+
+## Impressum
+This repository was developed as an Assignment for the Data Engineering(MSIN0166) Group Coursework of the University College London (UCL) by:
+* **Amita Sujith** Student ID: 23153341
+* **Alessandra Cerutti** Alessandra Cerutti, Student ID: 23228473 
+* **Nefeli Zampeta Marketou** Student ID: 23165493 
+* **Kevin Hayes** Student ID: 23146448 
+* **Rowan Alexander** Student ID: 23226266 
+
+#### License
+This project is licensed under the MIT License - see the [LICENSE.md](License.md) file for details
 
 
 
