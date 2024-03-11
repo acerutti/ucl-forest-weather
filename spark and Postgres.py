@@ -136,8 +136,8 @@ merged_df.write.csv(output_path, header=True, mode="overwrite")
 # Instantiates a client
 storage_client = storage.Client()
 
-## WEATHER BUCKET ##
-# The name for the new bucket for the weather
+## MERGED BUCKET ##
+# The name for the new bucket for the merged data
 
 bucket_name = "ucl-merged"
 bucket = storage_client.create_bucket(bucket_name)

@@ -1,5 +1,5 @@
 ##############################################################
-## Connection Postgres
+## Connection Postgres & Queries
 ##############################################################
 # code based from: https://github.com/GoogleCloudPlatform/cloud-sql-python-connector.git
 
@@ -73,9 +73,6 @@ def list_tables():
 
 # Call the list_tables function to print out all tables
 list_tables()
-
-
-## MOVE
 
 #################################################################
 ##### Checking Table Weather 
