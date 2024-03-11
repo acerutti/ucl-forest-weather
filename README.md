@@ -6,6 +6,6 @@ The goal of this project is to combine spatial image deforestation data with his
 
 
 
-![Architecture Diagram](report/provinces_report/Architecture_diagram.png)
+![Architecture Diagram](ucl-forest-weather/data/report/Architecture_diagram.png)
 
 
