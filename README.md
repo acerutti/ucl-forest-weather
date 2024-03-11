@@ -4,6 +4,12 @@
 
 Data Pipeline to store forest satellite images and weather data to better analyse deforestation causes.
 
+## Table of Contents
+* [Business Goal](#Business-Goal)
+* [Architecture Overview](#Architecture-Overview)
+* [Files in this repository](#Files-in-this-repository)
+* [Impressum](#Impressum)
+
 ## Business Goal
 
 The goal of this project is to combine spatial image deforestation data with historical and contemporary weather data, which includes tracking average temperature and rainfall. We have initially focused on Indonesia, though there is potential for expansion in the future. Our goal is to enhance deforestation analysis by providing a data pipeline and dashboard that can be used in the future to inform future decision-makers to identify the most effective interventions to address the deforestation crisis.
@@ -40,7 +46,7 @@ After transformation, the processed data is written back to Postgres CloudSQL, r
 The transformed data is then connected to METABASE, a business intelligence tool. In METABASE, we create interactive dashboards that visualize the deforestation status, providing insights through various charts and maps that leverage the merged and transformed deforestation and weather data.
 This end-to-end process allows for the data to be managed and analyzed efficiently, supporting data-driven decisions in deforestation management and environmental conservation efforts.
 
-## Files on in this repository
+## Files in this repository
 - `bucket.py`: contains functions for creating buckets and uploading files as well as folders
 - `postgres_Spark.py`: contains interaction with PostgreSQL and table merging via Spark
 - `postgres_SQL_queries.py`: contains interaction with PostgreSQL using SQL statement, contains functions to create new tables, merge data and check contents in tables
