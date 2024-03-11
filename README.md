@@ -1,8 +1,6 @@
-# ucl-forest-weather
+# Data Pipeline to Detect Deforestation Causes in Indonesia (ucl-forest-weather)
 
-## General Description
-
-Data Pipeline to store forest satellite images and weather data to better analyse deforestation causes.
+Data Pipeline to store forest satellite images and weather data to analyse deforestation causes in Indonesia better.
 
 ## Table of Contents
 * [Business Goal](#Business-Goal)
