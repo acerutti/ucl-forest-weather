@@ -1,0 +1,5 @@
+pandas==2.2.1
+protobuf==4.25.3
+pyspark==3.5.1
+Requests==2.31.0
+SQLAlchemy==2.0.25
