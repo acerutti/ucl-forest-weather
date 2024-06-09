@@ -2,24 +2,25 @@
 ## Connection Postgres
 ##############################################################
 # code based from: https://github.com/GoogleCloudPlatform/cloud-sql-python-connector.git
+# make sure to specify your project_id, region, instance name, current user
 
 from google.cloud.sql.connector import Connector # pip install "cloud-sql-python-connector[pg8000]"
 import sqlalchemy # pip install sqlalchemy
 
 # define the project id, region and instance name
-project_id = "engineering-group-project"
-region = "us-central1"
+project_id = "your_project_id"
+region = "region"
 instance_name = "forestnet-data"
 
 # grant Cloud SQL Client role to authenticated user
-current_user = ['alessandra.eli.cerutti@gmail.com']
+current_user = ['your_mail_adress']
 
 INSTANCE_CONNECTION_NAME = f"{project_id}:{region}:{instance_name}" 
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 
-DB_USER = "postgres"
-DB_PASS = "baucl"
-DB_NAME = "postgres"
+DB_USER = "DB_USER"
+DB_PASS = "DB_PASS"
+DB_NAME = "DB_NAME"
 
 # initialize Connector object
 connector = Connector()
